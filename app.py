@@ -48,31 +48,51 @@ def main():
 
 @app.route('/create_book', methods=['POST'])
 def create():
-    print ' bb'
-    if request.method=='POST':
-        print 'postin else '
-        print 'inside create method'
-        if not request.form['name']:
-            flash('please enter book name')
-
-        if not request.form['author']:
-            flash('enter author name')
-
-        if not request.form['price']:
-            flash('enter book price')
-        else:
-            print 'inside else '
-            # name = request.form['name']
-            # author = request.form['author']
-            # price = request.form['price']
             
-            book=Book(name =request.form['name'],author=request.form['author'],price=request.form['price'])
-            print 'book data ---',book
+    if not request.form['name']:
+        flash('please enter book name')
+
+    if not request.form['author']:
+        flash('enter author name')
+
+    if not request.form['price']:
+        flash('enter book price')
+    else:
+                                  
+        book=Book(name =request.form['name'],author=request.form['author'],price=request.form['price'])
+        print 'book data ---',book
            
-            db.session.add(book)
-            db.session.commit()
-            flash('Book Added Successfully')
+        db.session.add(book)
+        db.session.commit()
+        flash('Book Added Successfully')
     return book.name
+
+@app.route('/update/<book_id>', methods=['PUT'])
+def update(book_id):
+    print 'book_id --',book_id
+    if not request.form['name']:
+        flash('enter book name')
+    else:
+        b= Book.query.get(book_id)
+        print 'b ---',b
+        b.name=request.form['name']
+        b.author = request.form['author']
+        b.price = request.form['price']
+       
+        db.session.commit()
+    return b.name
+
+@app.route('/remove/<book_id>', methods=['DELETE'])
+def remove(book_id):
+    print 'book_id--',book_id
+    if not book_id:
+        flash('book not found')
+    else:
+        b=Book.query.get(book_id)
+        db.session.delete(b)
+        db.session.commit()
+    return b.name
+
 
 
 if __name__ == '__main__':
