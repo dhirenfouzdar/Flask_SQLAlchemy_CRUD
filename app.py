@@ -82,6 +82,11 @@ def update(book_id):
         db.session.commit()
     return b.name
 
+@app.route('/books', methods=['GET'])
+def getBooks():
+    b = Book.query.all()
+    return ('/')
+
 @app.route('/remove/<book_id>', methods=['DELETE'])
 def remove(book_id):
     print 'book_id--',book_id
