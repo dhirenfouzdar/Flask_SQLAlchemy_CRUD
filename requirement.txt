@@ -1,0 +1,11 @@
+adium-theme-ubuntu==0.3.4
+argh==0.26.2
+Jinja2==2.9.6
+MarkupSafe==1.0
+pathtools==0.1.2
+psycopg2==2.7.3.2
+PyYAML==3.12
+unity-lens-photos==1.0
+virtualenv==15.1.0
+watchdog==0.8.3
+Werkzeug==0.12.2
